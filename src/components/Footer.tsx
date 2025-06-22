@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
                     sheetlearn@immersivera.dev
                   </a>
                 </div>
-                <p className="text-gray-400">Coming Spring 2025</p>
+                <p className="text-gray-400">Coming Summer 2025</p>
               </div>
             </div>
 
