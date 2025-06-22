@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.1] - 2025-01-27
+
+### Added
+- Bolt.new "Powered by Bolt" floating badge in bottom right corner
+- Smooth hover animations and tooltip for the badge
+- Professional styling that complements the overall design
+
+### Changed
+- Updated main App component to include the new BoltBadge component
+
 ## [1.0.0] - 2025-01-27
 
 ### Added

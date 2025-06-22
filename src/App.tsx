@@ -7,6 +7,7 @@ import { EarlyPreviewSection } from './components/EarlyPreviewSection';
 import { FAQSection } from './components/FAQSection';
 import { EmailSignupSection } from './components/EmailSignupSection';
 import { Footer } from './components/Footer';
+import { BoltBadge } from './components/BoltBadge';
 
 function App() {
   const scrollToSignup = () => {
@@ -26,6 +27,7 @@ function App() {
       <FAQSection />
       <EmailSignupSection />
       <Footer />
+      <BoltBadge />
     </div>
   );
 }
