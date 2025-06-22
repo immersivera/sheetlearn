@@ -43,7 +43,7 @@ export const Footer: React.FC = () => {
               <h5 className="text-lg font-semibold mb-4">Follow Us</h5>
               <div className="flex space-x-4">
                 <a 
-                  href="#" 
+                  href="https://x.com/immersivEra" 
                   className="bg-gray-800 hover:bg-gray-700 p-3 rounded-xl transition-colors duration-300"
                   aria-label="Twitter"
                 >
@@ -51,13 +51,13 @@ export const Footer: React.FC = () => {
                 </a>
                 <a 
                   href="#" 
-                  className="bg-gray-800 hover:bg-gray-700 p-3 rounded-xl transition-colors duration-300"
+                  className="bg-gray-800 hover:bg-gray-700 p-3 rounded-xl transition-colors duration-300 hidden"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
                 <a 
-                  href="#" 
+                  href="https://github.com/immersivera/sheetlearn" 
                   className="bg-gray-800 hover:bg-gray-700 p-3 rounded-xl transition-colors duration-300"
                   aria-label="GitHub"
                 >
@@ -76,7 +76,7 @@ export const Footer: React.FC = () => {
               <p className="text-gray-400 text-sm mb-4 md:mb-0">
                 © 2025 SheetLearn. All rights reserved.
               </p>
-              <div className="flex space-x-6 text-sm">
+              <div className="flex space-x-6 text-sm hidden">
                 <a 
                   href="#" 
                   className="text-gray-400 hover:text-white transition-colors duration-300"
