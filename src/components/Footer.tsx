@@ -28,10 +28,10 @@ export const Footer: React.FC = () => {
                 <div className="flex items-center">
                   <Mail className="h-5 w-5 text-gray-400 mr-3" />
                   <a 
-                    href="mailto:team@sheetlearn.io" 
+                    href="mailto:sheetlearn@immersivera.dev" 
                     className="text-gray-300 hover:text-white transition-colors duration-300"
                   >
-                    team@sheetlearn.io
+                    sheetlearn@immersivera.dev
                   </a>
                 </div>
                 <p className="text-gray-400">Coming Spring 2025</p>
