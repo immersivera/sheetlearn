@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Mail, CheckCircle, Loader } from 'lucide-react';
+import { Mail, CheckCircle, ExternalLink } from 'lucide-react';
 
 export const EmailSignupSection: React.FC = () => {
   const [email, setEmail] = useState('');
   const [courseType, setCourseType] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email || !email.includes('@')) {
@@ -16,16 +15,30 @@ export const EmailSignupSection: React.FC = () => {
       return;
     }
 
-    setIsLoading(true);
     setError('');
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // Create mailto link with pre-filled content
+    const subject = encodeURIComponent('SheetLearn Waitlist - Early Access Request');
+    const body = encodeURIComponent(
+      `Hi SheetLearn Team,
+
+I'd like to join the waitlist for early access to SheetLearn.
+
+Email: ${email}
+Course Type: ${courseType || 'Not specified'}
+
+I'm excited to transform my Google Sheets into professional online courses!
+
+Best regards,
+${email.split('@')[0]}`
+    );
     
-    // Here you would typically send the data to your backend
-    console.log('Signup data:', { email, courseType });
+    const mailtoLink = `mailto:sheetlearn@immersivera.dev?subject=${subject}&body=${body}`;
     
-    setIsLoading(false);
+    // Open mailto link
+    window.location.href = mailtoLink;
+    
+    // Show success state
     setIsSubmitted(true);
   };
 
@@ -34,17 +47,49 @@ export const EmailSignupSection: React.FC = () => {
       <section id="signup" className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="bg-green-50 rounded-3xl p-12">
+            <div className="bg-green-50 rounded-3xl p-12 transform">
               <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-6" />
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                🎉 You're on the list!
+                📧 Email Client Opened!
               </h3>
               <p className="text-lg text-gray-600 mb-6">
-                We'll reach out when we open access. Get ready to transform your teaching!
+                Your email client should have opened with a pre-filled message. 
+                Just hit send to join our waitlist!
               </p>
-              <p className="text-sm text-gray-500">
-                Check your email for a confirmation message.
-              </p>
+              <div className="bg-white rounded-xl p-4 border border-green-200">
+                <p className="text-sm text-gray-600 mb-2">
+                  <strong>Didn't open automatically?</strong>
+                </p>
+                <button
+                  onClick={() => {
+                    const subject = encodeURIComponent('SheetLearn Waitlist - Early Access Request');
+                    const body = encodeURIComponent(
+                      `Hi SheetLearn Team,
+
+I'd like to join the waitlist for early access to SheetLearn.
+
+Email: ${email}
+Course Type: ${courseType || 'Not specified'}
+
+I'm excited to transform my Google Sheets into professional online courses!
+
+Best regards,
+${email.split('@')[0]}`
+                    );
+                    window.location.href = `mailto:sheetlearn@immersivera.dev?subject=${subject}&body=${body}`;
+                  }}
+                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300"
+                >
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  Click here to open email
+                </button>
+              </div>
+              <button
+                onClick={() => setIsSubmitted(false)}
+                className="mt-4 text-gray-500 hover:text-gray-700 text-sm underline transition-colors duration-300"
+              >
+                ← Go back to form
+              </button>
             </div>
           </div>
         </div>
@@ -70,10 +115,10 @@ export const EmailSignupSection: React.FC = () => {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-gray-50 rounded-3xl p-8">
+          <form onSubmit={handleSubmit} className="bg-gray-50 rounded-3xl p-8 hover:shadow-lg transition-shadow duration-300">
             <div className="space-y-6">
               {/* Email Input */}
-              <div>
+              <div className="transform transition-all duration-300 hover:scale-105">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                   Email Address *
                 </label>
@@ -82,14 +127,14 @@ export const EmailSignupSection: React.FC = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-blue-300"
                   placeholder="your@email.com"
                   required
                 />
               </div>
 
               {/* Course Type Input */}
-              <div>
+              <div className="transform transition-all duration-300 hover:scale-105">
                 <label htmlFor="courseType" className="block text-sm font-medium text-gray-700 mb-2">
                   What kind of courses do you create? (optional)
                 </label>
@@ -98,14 +143,14 @@ export const EmailSignupSection: React.FC = () => {
                   type="text"
                   value={courseType}
                   onChange={(e) => setCourseType(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-blue-300"
                   placeholder="e.g., Language learning, Professional development..."
                 />
               </div>
 
               {/* Error Message */}
               {error && (
-                <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">
+                <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-200 animate-shake">
                   {error}
                 </div>
               )}
@@ -113,23 +158,22 @@ export const EmailSignupSection: React.FC = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isLoading}
-                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:transform-none transition-all duration-300 flex items-center justify-center"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group"
               >
-                {isLoading ? (
-                  <>
-                    <Loader className="animate-spin h-5 w-5 mr-2" />
-                    Joining...
-                  </>
-                ) : (
-                  'Notify Me'
-                )}
+                <Mail className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
+                Send Email to Join
               </button>
 
               {/* Privacy Note */}
-              <p className="text-sm text-gray-500 text-center">
-                We'll only contact you about SheetLearn. No spam, ever.
-              </p>
+              <div className="text-center">
+                <p className="text-sm text-gray-500">
+                  This will open your email client with a pre-filled message to{' '}
+                  <span className="font-medium text-blue-600">sheetlearn@immersivera.dev</span>
+                </p>
+                <p className="text-xs text-gray-400 mt-1">
+                  We'll only contact you about SheetLearn. No spam, ever.
+                </p>
+              </div>
             </div>
           </form>
         </div>
