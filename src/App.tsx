@@ -7,7 +7,6 @@ import { EarlyPreviewSection } from './components/EarlyPreviewSection';
 import { FAQSection } from './components/FAQSection';
 import { EmailSignupSection } from './components/EmailSignupSection';
 import { Footer } from './components/Footer';
-import { BoltBadge } from './components/BoltBadge';
 import { CookieBanner } from './components/CookieBanner';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
 import { CookiePolicyPage } from './components/CookiePolicyPage';
@@ -45,7 +44,6 @@ function App() {
         onPrivacyPolicy={() => setPage('privacy')}
         onCookiePolicy={() => setPage('cookies')}
       />
-      <BoltBadge />
       <CookieBanner onViewCookiePolicy={() => setPage('cookies')} />
     </div>
   );
