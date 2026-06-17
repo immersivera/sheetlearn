@@ -1,7 +1,12 @@
 import React from 'react';
 import { Mail, Twitter, Linkedin, Github, BookOpen } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onPrivacyPolicy: () => void;
+  onCookiePolicy: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onPrivacyPolicy, onCookiePolicy }) => {
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="container mx-auto px-4">
@@ -76,19 +81,19 @@ export const Footer: React.FC = () => {
               <p className="text-gray-400 text-sm mb-4 md:mb-0">
                 © 2025 SheetLearn. All rights reserved.
               </p>
-              <div className="flex space-x-6 text-sm hidden">
-                <a 
-                  href="#" 
-                  className="text-gray-400 hover:text-white transition-colors duration-300"
-                >
-                  Terms of Service
-                </a>
-                <a 
-                  href="#" 
+              <div className="flex space-x-6 text-sm">
+                <button
+                  onClick={onPrivacyPolicy}
                   className="text-gray-400 hover:text-white transition-colors duration-300"
                 >
                   Privacy Policy
-                </a>
+                </button>
+                <button
+                  onClick={onCookiePolicy}
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  Cookie Policy
+                </button>
               </div>
             </div>
           </div>
