@@ -9,6 +9,30 @@ declare global {
 
 const STORAGE_KEY = 'sheetlearn_cookie_consent';
 
+function loadGTM() {
+  const id = import.meta.env.VITE_GTM_ID;
+  if (!id || document.getElementById('gtm-script')) return;
+
+  const script = document.createElement('script');
+  script.id = 'gtm-script';
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtm.js?id=${id}`;
+  document.head.appendChild(script);
+
+  const noscript = document.createElement('noscript');
+  noscript.id = 'gtm-noscript';
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.googletagmanager.com/ns.html?id=${id}`;
+  iframe.height = '0';
+  iframe.width = '0';
+  iframe.style.display = 'none';
+  iframe.style.visibility = 'hidden';
+  noscript.appendChild(iframe);
+  document.body.insertBefore(noscript, document.body.firstChild);
+
+  window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+}
+
 interface CookieBannerProps {
   onViewCookiePolicy: () => void;
 }
@@ -18,18 +42,23 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ onViewCookiePolicy }
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) setVisible(true);
+    if (stored === 'accepted') {
+      loadGTM();
+    } else if (!stored) {
+      setVisible(true);
+    }
   }, []);
 
   const accept = () => {
     localStorage.setItem(STORAGE_KEY, 'accepted');
-    window.dataLayer?.push({ event: 'cookie_consent_accepted', cookie_consent: 'accepted' });
+    loadGTM();
+    window.dataLayer.push({ event: 'cookie_consent_accepted', cookie_consent: 'accepted' });
     setVisible(false);
   };
 
   const decline = () => {
     localStorage.setItem(STORAGE_KEY, 'declined');
-    window.dataLayer?.push({ event: 'cookie_consent_declined', cookie_consent: 'declined' });
+    window.dataLayer.push({ event: 'cookie_consent_declined', cookie_consent: 'declined' });
     setVisible(false);
   };
 
