@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Twitter, Linkedin, Github, BookOpen } from 'lucide-react';
+import { Mail, BookOpen } from 'lucide-react';
 
 interface FooterProps {
   onPrivacyPolicy: () => void;
@@ -39,40 +39,10 @@ export const Footer: React.FC<FooterProps> = ({ onPrivacyPolicy, onCookiePolicy 
                     sheetlearn@immersivera.dev
                   </a>
                 </div>
-                <p className="text-gray-400">Coming Summer 2025</p>
+                <p className="text-gray-400">Coming Soon</p>
               </div>
             </div>
 
-            {/* Social */}
-            <div>
-              <h5 className="text-lg font-semibold mb-4">Follow Us</h5>
-              <div className="flex space-x-4">
-                <a 
-                  href="https://x.com/immersivEra" 
-                  className="bg-gray-800 hover:bg-gray-700 p-3 rounded-xl transition-colors duration-300"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="h-5 w-5" />
-                </a>
-                <a 
-                  href="#" 
-                  className="bg-gray-800 hover:bg-gray-700 p-3 rounded-xl transition-colors duration-300 hidden"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </a>
-                <a 
-                  href="https://github.com/immersivera/sheetlearn" 
-                  className="bg-gray-800 hover:bg-gray-700 p-3 rounded-xl transition-colors duration-300"
-                  aria-label="GitHub"
-                >
-                  <Github className="h-5 w-5" />
-                </a>
-              </div>
-              <p className="text-sm text-gray-500 mt-4">
-                Updates coming soon
-              </p>
-            </div>
           </div>
 
           {/* Bottom Bar */}
